@@ -1,0 +1,10 @@
+version: "3"
+services:
+  database:
+    image: postgres:10.4-alpine
+    container_name: kafka-nodejs-example-database
+    environment:
+      POSTGRES_DB: invoiceapp
+      POSTGRES_USER: godwinekuma
+    ports:
+      - 5432:5432
