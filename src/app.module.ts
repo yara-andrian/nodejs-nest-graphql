@@ -20,7 +20,7 @@ import { CatsService } from './cats/cats.service';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DATABASE_URL || 'localhost',
+      host: process.env.DB_HOST || 'localhost',
       port: 5432,
       username: process.env.DB_USER || 'godwinekuma',
       password: process.env.DB_PASSWORD || '',
