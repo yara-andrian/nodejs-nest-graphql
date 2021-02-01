@@ -6,7 +6,7 @@ module.exports = {
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'invoiceapp',
   entities: ['dist/**/*.model.ts'],
-  migrations: ['dist/src/database/migrations/*.js'],
+  migrations: ['dist/database/migrations/*.js'],
   cli: {
     migrationsDir: 'src/database/migrations',
   },
