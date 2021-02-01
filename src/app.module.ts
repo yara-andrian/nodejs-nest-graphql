@@ -16,7 +16,9 @@ import { CatsService } from './cats/cats.service';
     InvoiceModule,
     CustomerModule,
     GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql'
+      autoSchemaFile: 'schema.gql',
+      introspection: true,
+      playground: true
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
