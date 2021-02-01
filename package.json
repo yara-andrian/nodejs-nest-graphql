@@ -4,7 +4,10 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "engines": {
+    "node": "14.15"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
