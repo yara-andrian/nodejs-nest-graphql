@@ -3,6 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { InvoiceModule } from './invoice/invoice.module';
 import { CustomerModule } from './customer/customer.module';
+import {UserModule} from './user/user.module'
 import {CatsModule} from './cats/cats.module'
 import { AppController } from './app.controller';
 import {CatsController} from './cats/cats.controller'
@@ -15,6 +16,7 @@ import { CatsService } from './cats/cats.service';
     CatsModule,
     InvoiceModule,
     CustomerModule,
+    UserModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       introspection: true,
@@ -28,7 +30,7 @@ import { CatsService } from './cats/cats.service';
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_NAME || 'invoiceapp',
       entities: ['dist/**/*.model.js'],
-      synchronize: false,
+      synchronize: true,
     }),
   ],
   controllers: [AppController, CatsController],
