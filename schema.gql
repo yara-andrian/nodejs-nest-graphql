@@ -45,6 +45,29 @@ type CustomerModel {
   updated_at: DateTime!
 }
 
+type CommentModel {
+  id: String!
+  user: UserModel!
+  article: ArticleModel!
+  details: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type ArticleModel {
+  id: String!
+  title: String!
+  description: String!
+  crop: String!
+  country: String!
+  tldr: String!
+  context: String!
+  user: UserModel!
+  comments: [CommentModel!]
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
 type UserModel {
   id: String!
   name: String!
@@ -53,6 +76,8 @@ type UserModel {
   address: String!
   created_at: DateTime!
   updated_at: DateTime!
+  articles: [ArticleModel!]
+  comments: [CommentModel!]
 }
 
 type Query {
@@ -62,12 +87,18 @@ type Query {
   invoices: [InvoiceModel!]!
   user(id: String!): UserModel!
   users: [UserModel!]!
+  article(id: String!): ArticleModel!
+  articles: [ArticleModel!]!
+  comment(id: String!): CommentModel!
+  comments: [CommentModel!]!
 }
 
 type Mutation {
   createCustomer(address: String, phone: String, email: String!, name: String!): CustomerModel!
   createInvoice(invoice: CreateInvoiceDTO!): InvoiceModel!
   createUser(address: String, phone: String, email: String!, name: String!): UserModel!
+  createArticle(article: CreateArticleDTO!): ArticleModel!
+  createComment(comment: CreateCommentDTO!): CommentModel!
 }
 
 input CreateInvoiceDTO {
@@ -87,4 +118,20 @@ input ItemDTO {
   description: String!
   rate: Float!
   quantity: Float!
+}
+
+input CreateArticleDTO {
+  user: String!
+  title: String!
+  description: String!
+  tldr: String!
+  context: String!
+  crop: String!
+  country: String!
+}
+
+input CreateCommentDTO {
+  user: String!
+  article: String!
+  details: String!
 }

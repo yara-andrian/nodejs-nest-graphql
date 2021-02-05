@@ -10,12 +10,16 @@ import {CatsController} from './cats/cats.controller'
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './middleware/logger';
 import { CatsService } from './cats/cats.service';
+import { ArticleModule } from './article/article.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
     CatsModule,
     InvoiceModule,
     CustomerModule,
+    CommentModule,
+    ArticleModule,
     UserModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',

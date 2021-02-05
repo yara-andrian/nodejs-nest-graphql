@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { ObjectType, Field } from '@nestjs/graphql';
-
+import {ArticleModel} from '../article/article.model'
+import {CommentModel} from '../comment/comment.model'
 @ObjectType()
 @Entity()
 export class UserModel {
@@ -33,4 +34,12 @@ export class UserModel {
   @Column()
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Field(type => [ArticleModel], { nullable: true })
+  @OneToMany(type => ArticleModel, article => article.user)
+  articles: ArticleModel[]
+
+  @Field(type => [CommentModel], { nullable: true })
+  @OneToMany(type => CommentModel, comment => comment.user)
+  comments: CommentModel[]
 }

@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 import { ObjectType, Field } from '@nestjs/graphql';
 import { InvoiceModel } from '../invoice/invoice.model';
 @ObjectType()
-@Entity()
+@Entity('customer')
 export class CustomerModel {
   @Field()
   @PrimaryGeneratedColumn('uuid')
@@ -16,16 +16,20 @@ export class CustomerModel {
   @Field()
   @Column('varchar', { length: 15 })
   phone: string;
+
   @Field()
   @Column('text')
   address: string;
+
   @Field(type => [InvoiceModel], { nullable: true })
   @OneToMany(type => InvoiceModel, invoice => invoice.customer)
   invoices: InvoiceModel[]
+
   @Field()
   @Column()
   @CreateDateColumn()
   created_at: Date;
+
   @Field()
   @Column()
   @UpdateDateColumn()

@@ -18,7 +18,6 @@ export class CustomerResolver {
   @ResolveField(returns => [InvoiceModel])
   async invoices(@Parent() customer) {
     const { id } = customer;
-    console.log(customer);
     return this.invoiceService.findByCustomer(id);
   }
   @Query(returns => [CustomerModel])
