@@ -1,12 +1,13 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { TypeOrmModule } from '@nestjs/typeorm'
+import { TypeOrmModule } from '@nestjs/typeorm';
+import * as cookieParser from 'cookie-parser';
 import { InvoiceModule } from './invoice/invoice.module';
 import { CustomerModule } from './customer/customer.module';
-import {UserModule} from './user/user.module'
-import {CatsModule} from './cats/cats.module'
+import { UserModule } from './user/user.module';
+import { CatsModule } from './cats/cats.module';
 import { AppController } from './app.controller';
-import {CatsController} from './cats/cats.controller'
+import { CatsController } from './cats/cats.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './middleware/logger';
 import { CatsService } from './cats/cats.service';
@@ -22,9 +23,14 @@ import { CommentModule } from './comment/comment.module';
     ArticleModule,
     UserModule,
     GraphQLModule.forRoot({
+      context: ({ req, res }) => ({ req, res }),
+      cors: {
+        credentials: true,
+        origin: true,
+      },
       autoSchemaFile: 'schema.gql',
       introspection: true,
-      playground: true
+      playground: true,
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -41,10 +47,7 @@ import { CommentModule } from './comment/comment.module';
   providers: [AppService, CatsService],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer){
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes('cats')
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware, cookieParser()).forRoutes('cats');
   }
-
 }

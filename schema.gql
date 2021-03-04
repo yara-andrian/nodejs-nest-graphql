@@ -45,6 +45,11 @@ type CustomerModel {
   updated_at: DateTime!
 }
 
+type LoginResponse {
+  accessToken: String!
+  customer: CustomerModel!
+}
+
 type CommentModel {
   id: String!
   user: UserModel!
@@ -94,7 +99,9 @@ type Query {
 }
 
 type Mutation {
-  createCustomer(address: String, phone: String, email: String!, name: String!): CustomerModel!
+  createCustomer(password: String!, address: String, phone: String, email: String!, name: String!): CustomerModel!
+  login(password: String!, email: String!): LoginResponse!
+  logout: Boolean!
   createInvoice(invoice: CreateInvoiceDTO!): InvoiceModel!
   createUser(address: String, phone: String, email: String!, name: String!): UserModel!
   createArticle(article: CreateArticleDTO!): ArticleModel!

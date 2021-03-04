@@ -22,4 +22,8 @@ export class CustomerService {
       findOne(id: string): Promise<CustomerModel> {
         return this.customerRepository.findOne(id);
       }
+
+      findByEmail(email: string): Promise<CustomerModel>{
+        return this.customerRepository.findOne({ where: { email } });
+      }
 }
